@@ -15,8 +15,8 @@ function createBot() {
   console.log(`[Bot] Attempting connection...`);
   try {
     const bot = bedrock.createClient({
-      host: config.server.ip,
-      port: parseInt(config.server.port),
+      host: config.WorldWidePlusSMP,
+      port: parseInt(config.23270),
       username: config['bot-account'].username,
       offline: true,
       version: "" // BLANK FOR AUTO-DETECT
