@@ -7,7 +7,7 @@
   },
   "server": {
     "ip": "WorldWidePlusSMP.aternos.me",
-    "port": elasmobranch.aternos.host,
+    "port": 23270,
     "version": "",
     "try-creative": false
   },
