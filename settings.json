@@ -6,7 +6,7 @@
     "type": "offline"
   },
   "server": {
-    "ip": "WorldWidePlusSMP",
+    "ip": "WorldWidePlusSMP.aternos.me",
     "port": 23270,
     "version": "",
     "try-creative": false
