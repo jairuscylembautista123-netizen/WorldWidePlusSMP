@@ -48,8 +48,8 @@ function createBot() {
 
   try {
     bot = bedrock.createClient({
-      host: config.server.ip, //[cite: 1]
-      port: parseInt(config.server.port), //[cite: 1]
+      host: config.WorldWidePlusSMP, //[cite: 1]
+      port: parseInt(config.23270), //[cite: 1]
       username: config['bot-account'].username, //[cite: 1]
       offline: true, //[cite: 1]
       version: "" // I SAID BLANK![cite: 1]
