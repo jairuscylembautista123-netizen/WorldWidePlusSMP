@@ -17,7 +17,7 @@ function createBot() {
     const bot = bedrock.createClient({
       host: config.WorldWidePlusSMP,
       port: parseInt(config.23270),
-      username: config['bot-account'].username,
+      username: config['AFK-Bot'].username,
       offline: true,
       version: "" // BLANK FOR AUTO-DETECT
     });
