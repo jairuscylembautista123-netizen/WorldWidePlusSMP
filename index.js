@@ -1,40 +1,33 @@
-'use strict';
-
-const bedrock = require('bedrock-protocol');
-const config = require('./settings.json');
 const express = require('express');
-
+const { Client } = require('aternos-api');
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// Health check so Render doesn't think the bot is dead
-app.get('/', (req, res) => res.send('Bot is Alive!'));
-app.listen(PORT, () => console.log(`[Server] Port ${PORT}`));
+// Keep Render from being a "looser" and shutting down
+app.get('/', (req, res) => res.send('Xiality Sigma Engine: ONLINE 🧤'));
+app.listen(3000, () => console.log('Web server is locked in! 🛡️🔥'));
 
-function createBot() {
-  console.log(`[Bot] Attempting connection...`);
-  try {
-    const bot = bedrock.createClient({
-      host: config.WorldWidePlusSMP,
-      port: parseInt(config.23270),
-      username: config['AFK-Bot'].username,
-      offline: true,
-      version: "" // BLANK FOR AUTO-DETECT
-    });
+const aternos = new Client();
 
-    bot.on('spawn', () => console.log('[+] Spawned!'));
-    bot.on('error', (err) => {
-      console.log(`[!] Error: ${err.message}`);
-      setTimeout(createBot, 10000); // Reconnect loop
-    });
-    bot.on('close', () => {
-      console.log('[-] Closed. Retrying...');
-      setTimeout(createBot, 10000);
-    });
-  } catch (e) {
-    console.log(`[CRASH] ${e.message}`);
-    setTimeout(createBot, 10000);
-  }
+async function keepServerAlive() {
+    try {
+        // LOCK IN YOUR ACTUAL TRUTH CREDENTIALS
+        await aternos.login('YOUR_USERNAME', 'YOUR_PASSWORD');
+        const servers = await aternos.getServers();
+        const myServer = servers[0]; // Your main Sigma server
+
+        setInterval(async () => {
+            await myServer.fetch();
+            if (myServer.status === 'offline') {
+                console.log("STATUS: STINKY_OFFLINE... RESTARTING... 💀");
+                await myServer.start();
+            } else {
+                console.log("STATUS: SIGMA_ONLINE... VIBE_CHECK: 1,000,000/10 🧤");
+            }
+        }, 300000); // Check every 5 minutes
+    } catch (err) {
+        console.log("ENGINE_CHOPPED: Reconnecting in 1 minute... 📟");
+        setTimeout(keepServerAlive, 60000);
+    }
 }
 
-createBot();
+keepServerAlive();
